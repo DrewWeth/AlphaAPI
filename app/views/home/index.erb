@@ -1,0 +1,30 @@
+<h3>Welcome</h3>
+
+
+<label>Lat</label>
+<div id="lat">
+</div>
+
+<label>Long</label>
+<div id="long">
+</div>
+
+<label>Accuracy</label>
+<div id="acc">
+</div>
+
+
+
+<script>
+  $(document).ready(function(){
+
+    navigator.geolocation.getCurrentPosition(GetLocation);
+    function GetLocation(location) {
+      $('#lat').html(location.coords.latitude);
+      $('#long').html(location.coords.longitude);
+      $('#acc').html(location.coords.accuracy);
+    }
+
+
+  });
+</script>

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @post.content %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @post.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @post.longitude %>
+</p>
+
+<p>
+  <strong>Views:</strong>
+  <%= @post.views %>
+</p>
+
+<p>
+  <strong>Ups:</strong>
+  <%= @post.ups %>
+</p>
+
+<p>
+  <strong>Downs:</strong>
+  <%= @post.downs %>
+</p>
+
+<p>
+  <strong>Radius:</strong>
+  <%= @post.radius %>
+</p>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>

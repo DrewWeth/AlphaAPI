@@ -1,0 +1,40 @@
+<h1>Listing posts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Views</th>
+      <th>Ups</th>
+      <th>Downs</th>
+      <th>Radius</th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.content %></td>
+        <td><%= post.latitude %></td>
+        <td><%= post.longitude %></td>
+        <td><%= post.views %></td>
+        <td><%= post.ups %></td>
+        <td><%= post.downs %></td>
+        <td><%= post.radius %></td>
+
+        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Up', up_path(:id => post.id), :method => 'post'  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Post', new_post_path %>

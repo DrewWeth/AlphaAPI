@@ -1,0 +1,35 @@
+Design aspects
+- Video on main page
+- Kick ass 5 layer non-hijacking parallax on about page
+
+
+
+
+API future
+News yik yak
+
+
+Nightlife API
+- Log in with Facebook (or keep seperate? What if you meet someone and dont want to add them to facebook but still want their updates...)
+- "Check in" (Looks up local bars/attractions)
+- 3 stars for "coolness level"
+- Only available to friends/people you've agreed to let you see it
+- Only keeps history of 12-24 hours
+
+Features
+- See who's in a new city/area
+- See where the density of people are (house parties, bars, frat parties)
+- Out of nearby possibilities you can either hit "yes or no" to hangout just like Tinder.
+- If both yes then it exchanges contact info, recommends places to hang out.
+
+
+Uses
+- Track a night of fun
+-
+
+
+Features to implement
+- GPS "Check in"
+
+Models
+Check ins
