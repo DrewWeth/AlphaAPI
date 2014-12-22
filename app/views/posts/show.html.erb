@@ -35,5 +35,9 @@
   <%= @post.radius %>
 </p>
 
+
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
+
+<br>
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=700x900&sensor=false&zoom=13&markers=#{@post.latitude}%2C#{@post.longitude}" %>
