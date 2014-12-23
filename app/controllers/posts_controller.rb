@@ -38,7 +38,7 @@ class PostsController < ApplicationController
 
   def down
     post = Post.find(params["id"])
-    post.ups -= 1
+    post.downs += 1
     if post.ups < post.downs
       post.radius -= 0.2
     end
@@ -79,6 +79,30 @@ class PostsController < ApplicationController
     end
   end
 
+  # GET /submit
+  def submit
+    if params["device_id"] != nil and device = Device.find(params["device_id"])
+      if params["auth_key"] and params["auth_key"] == device.auth_key
+        if params["latitude"] != nil and params["longitude"] != nil
+          @post = Post.new
+          @post.content = params["content"]
+          @post.latitude = params["latitude"]
+          @post.longitude = params["longitude"]
+          @post.device_id = params["device_id"]
+          if @post.save
+            render :json => @post
+          end
+        else
+          render :json => '{"status": "failed","reason": "need latitude and longitude position"}'
+        end
+      else
+        render :json => '{"status": "failed","reason": "invalid auth_key"}'
+      end
+    else
+      render :json => '{"status": "failed","reason": "invalid device"}'
+    end
+  end
+
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
@@ -111,6 +135,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:content, :latitude, :longitude, :views, :ups, :downs, :radius)
+      params.require(:post).permit(:content, :latitude, :longitude, :views, :ups, :downs, :radius, :device_id)
     end
 end

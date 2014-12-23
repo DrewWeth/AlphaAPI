@@ -10,8 +10,9 @@
       <th>Ups</th>
       <th>Downs</th>
       <th>Radius</th>
+      <th>Device ID</th>
 
-      <th colspan="3"></th>
+      <th colspan="5"></th>
     </tr>
   </thead>
 
@@ -25,11 +26,13 @@
         <td><%= post.ups %></td>
         <td><%= post.downs %></td>
         <td><%= post.radius %></td>
-
+        <td><%= post.device_id %></td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <td><%= link_to 'Up', up_path(:id => post.id), :method => 'post'  %></td>
+        <td><%= link_to 'Down', down_path(:id => post.id), :method => 'post'  %></td>
+
       </tr>
     <% end %>
   </tbody>

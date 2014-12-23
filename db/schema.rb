@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141221235157) do
+ActiveRecord::Schema.define(version: 20141223012333) do
+
+  create_table "devices", force: true do |t|
+    t.string   "auth_key"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "posts", force: true do |t|
     t.string   "content",    default: ""
@@ -21,6 +27,7 @@ ActiveRecord::Schema.define(version: 20141221235157) do
     t.integer  "ups",        default: 0
     t.integer  "downs",      default: 0
     t.float    "radius",     default: 5.0
+    t.integer  "device_id",  default: 1,   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

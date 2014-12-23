@@ -8,6 +8,7 @@ class CreatePosts < ActiveRecord::Migration
       t.integer :ups, :default => 0
       t.integer :downs, :default => 0
       t.float :radius, :default => 5
+      t.integer :device_id, :default => 1, :null => false
 
       t.timestamps
     end

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <strong>id key:</strong>
+  <%= @device.id %>
+</p>
+<p>
+  <strong>Auth key:</strong>
+  <%= @device.auth_key %>
+</p>
+
+<%= link_to 'Edit', edit_device_path(@device) %> |
+<%= link_to 'Back', devices_path %>
