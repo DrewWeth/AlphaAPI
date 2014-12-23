@@ -28,7 +28,8 @@ class PostsController < ApplicationController
   ## needs parameters
   def get_nearby
     # radius = params["radius"].to_f || 5.0
-    posts = Post.all
+    posts = Post.where("created_at > ?", 3.days.ago)
+    posts.order('updated_at DESC')
     matches = []
     posts.each do |p|
       if Geocoder::Calculations.distance_between([params["latitude"], params["longitude"]] , [p.latitude, p.longitude]) < p.radius
