@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
 
   get 'posts/nearby' => 'posts#get_nearby', :as => 'nearby'
-  get 'posts/submit' => 'posts#submit', :as => 'submit'
+  post 'posts/submit' => 'posts#submit', :as => 'submit'
 
   resources :posts
 
