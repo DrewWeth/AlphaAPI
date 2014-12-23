@@ -1,2 +1,6 @@
 class Post < ActiveRecord::Base
+  validates :content, presence: true
+  validates :latitude, presence: true
+  validates :longitude, presence: true
+  validates :device_id, presence: true
 end
