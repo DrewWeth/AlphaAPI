@@ -2,7 +2,7 @@ class DevicesController < ApplicationController
   before_action :set_device, only: [:show, :edit, :update, :destroy]
   skip_before_filter  :verify_authenticity_token
   protect_from_forgery with: :null_session
-  
+
   # GET /devices
   # GET /devices.json
   def index
@@ -11,9 +11,11 @@ class DevicesController < ApplicationController
 
   # POST /devices/register
   def register
-    require 'securerandom'
+    # require 'securerandom'
     device = Device.new
-    device.auth_key = SecureRandom.urlsafe_base64
+    # device.auth_key = SecureRandom.urlsafe_base64
+    device.auth_key = random_string
+
     if device.save
       render :json => device
     end
@@ -78,6 +80,13 @@ class DevicesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_device
       @device = Device.find(params[:id])
+    end
+
+    def random_string(length=10)
+      chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'
+      password = ''
+      length.times { password << chars[rand(chars.size)] }
+      password
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

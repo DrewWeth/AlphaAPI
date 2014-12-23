@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  post 'devices/register' => 'devices#register'
+  post 'devices/register' => 'devices#register', :as => 'register'
 
   resources :devices
 
