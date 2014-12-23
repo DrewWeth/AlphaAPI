@@ -41,3 +41,8 @@
 <br>
 
 <%= link_to 'New Post', new_post_path %>
+
+<br>
+
+<% test_device = Device.find(1) %>
+<%= link_to 'Make new post', submit_path(:content => (0...6).map { (65 + rand(26)).chr }.join, :device_id => 1, :auth_key => test_device.auth_key,  :latitude => 34, :longitude => -90), :method => 'post' %>
