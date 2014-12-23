@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141223012333) do
+ActiveRecord::Schema.define(version: 20141223230724) do
 
   create_table "devices", force: true do |t|
     t.string   "auth_key"
@@ -31,5 +31,7 @@ ActiveRecord::Schema.define(version: 20141223012333) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "posts", ["created_at"], name: "post_created_at_index"
 
 end
