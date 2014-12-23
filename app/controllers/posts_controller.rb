@@ -28,15 +28,14 @@ class PostsController < ApplicationController
   ## needs parameters
   def get_nearby
     # radius = params["radius"].to_f || 5.0
-    posts = Post.where("created_at > ?", 3.days.ago)
-    posts.order('updated_at DESC')
+    posts = Post.where("created_at > ?", 1.days.ago)
     matches = []
     posts.each do |p|
       if Geocoder::Calculations.distance_between([params["latitude"], params["longitude"]] , [p.latitude, p.longitude]) < p.radius
         matches << p
       end
     end
-    render :json => matches
+    render :json => matches.sort{|a,b| b.updated_at <=> a.updated_at} ## Can push off to (1) database or (2) iphone for efficiency
   end
 
   def down
