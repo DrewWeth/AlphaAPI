@@ -26,10 +26,19 @@ class PostsController < ApplicationController
   end
 
   ## needs parameters
+  ## PARAMETERS:
+  ## Latitude, longitude, last
+  ## last is the date of the last read article
+
+  ## This needs to be redone so hard.
   def get_nearby
     # radius = params["radius"].to_f || 5.0
-    posts = Post.where("created_at > ?", 1.days.ago)
     matches = []
+    if params["last"] == nil
+      posts = Post.where("created_at > ?", 2.days.ago).last(20)
+    else
+      posts = Post.where(['created_at < ?', params["last"]]).last(20)
+    end
     posts.each do |p|
       if Geocoder::Calculations.distance_between([params["latitude"], params["longitude"]] , [p.latitude, p.longitude]) < p.radius
         matches << p
