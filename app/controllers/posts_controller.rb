@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.last(1000)
   end
 
   # GET /posts/1
@@ -16,13 +16,9 @@ class PostsController < ApplicationController
   end
 
   def up
-    post = Post.find(params["id"])
-    post.ups += 1
-    if post.ups > post.downs
-      post.radius += 0.5
-    end
-    post.save
-    render :json => post
+    ## implement many-to-many here
+    Post.update_counters params["id"], ups: 1, radius: 0.5
+    render :json => '{"status":"success"}'
   end
 
   ## needs parameters
@@ -37,32 +33,27 @@ class PostsController < ApplicationController
     if params["last"] == nil
       posts = Post.where("created_at > ?", 2.days.ago).last(20)
     else
-      posts = Post.where(['created_at < ?', params["last"]]).last(20)
+      posts = Post.where(['created_at < ?', params["last"]]).last(10)
     end
     posts.each do |p|
       if Geocoder::Calculations.distance_between([params["latitude"], params["longitude"]] , [p.latitude, p.longitude]) < p.radius
         matches << p
+        Post.update_counters p.id, views: 1, radius: 0.20
       end
     end
     render :json => matches.sort{|a,b| b.updated_at <=> a.updated_at} ## Can push off to (1) database or (2) iphone for efficiency
   end
 
   def down
-    post = Post.find(params["id"])
-    post.downs += 1
-    if post.ups < post.downs
-      post.radius -= 0.2
-    end
-    post.save
-    render :json => post
+    ## implement many-to-many here
+    Post.update_counters params["id"], downs: 1, radius: -0.3
+    render :json => '{"status":"success"}'
   end
 
+  ## not used
   def viewed
-    post = Post.find(params["id"])
-    post.views += 1
-    post.radius += 0.25
-    post.save
-    render :json => post
+    Post.update_counters params["id"], views: 1, radius: 0.2
+    render :json => '{"status":"success"}'
   end
 
   # GET /posts/new
