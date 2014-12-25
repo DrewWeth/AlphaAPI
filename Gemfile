@@ -16,6 +16,7 @@ group :production do
 end
 
 
+gem 'parse-ruby-client', '~> 0.3.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'

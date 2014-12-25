@@ -38,6 +38,10 @@ GEM
     coffee-script-source (1.8.0)
     erubis (2.7.0)
     execjs (2.2.2)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.9.1)
+      faraday (>= 0.7.4, < 0.10)
     geocoder (1.2.6)
     hike (1.2.3)
     i18n (0.7.0)
@@ -54,6 +58,10 @@ GEM
     mime-types (1.25.1)
     minitest (5.5.0)
     multi_json (1.10.1)
+    multipart-post (2.0.0)
+    parse-ruby-client (0.3.0)
+      faraday
+      faraday_middleware
     pg (0.17.1)
     polyglot (0.3.5)
     rack (1.5.2)
@@ -119,6 +127,7 @@ DEPENDENCIES
   geocoder (~> 1.2.6)
   jbuilder (~> 2.0)
   jquery-rails
+  parse-ruby-client (~> 0.3.0)
   pg
   rails (= 4.1.4)
   sass-rails (~> 4.0.3)

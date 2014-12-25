@@ -3,5 +3,6 @@ class Post < ActiveRecord::Base
   validates :latitude, presence: true
   validates :longitude, presence: true
   validates :device_id, presence: true
-
+  
+  belongs_to :device
 end

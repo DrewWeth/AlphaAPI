@@ -2,6 +2,11 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   skip_before_filter  :verify_authenticity_token
   protect_from_forgery with: :null_session
+  require 'parse-ruby-client'
+
+  Parse.init :application_id => "Q5N1wgUAJKrEbspM7Q2PBv32JbTPt5TQpmstic8D",
+  :api_key        => "F42ROt0bhDo0GUnsqqO2t5id7Zj37b64fGYYzRZv"
+
 
   # GET /posts
   # GET /posts.json
@@ -18,6 +23,18 @@ class PostsController < ApplicationController
   def up
     ## implement many-to-many here
     Post.update_counters params["id"], ups: 1, radius: 0.5
+    post = Post.find(params["id"])
+    if post.ups.modulo(2).zero?
+      message = "Your post got " + post.ups.to_s + " upvotes!"
+      data = { :alert => message }
+
+      push = Parse::Push.new(data)
+      push.where = { :deviceToken => post.device.parse_token }
+      push.save
+
+      puts "Pushed to device " + post.device.parse_token
+
+    end
     render :json => '{"status":"success"}'
   end
 
