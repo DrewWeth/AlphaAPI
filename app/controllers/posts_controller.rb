@@ -29,7 +29,7 @@ class PostsController < ApplicationController
       data = { :alert => message }
 
       push = Parse::Push.new(data)
-      push.where = { :ObjectID => post.device.parse_token }
+      push.where = { :objectId => post.device.parse_token }
       push.save
 
       puts "Pushed to device " + post.device.parse_token
