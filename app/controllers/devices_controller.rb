@@ -15,6 +15,7 @@ class DevicesController < ApplicationController
     device = Device.new
     # device.auth_key = SecureRandom.urlsafe_base64
     device.auth_key = random_string
+    device.parse_token = params["parse_token"]
 
     if device.save
       render :json => device
