@@ -54,11 +54,14 @@ class PostsController < ApplicationController
     end
     posts.each do |p|
       if Geocoder::Calculations.distance_between([params["latitude"], params["longitude"]] , [p.latitude, p.longitude]) < p.radius
-        matches << p
+        obj = {:post => p, :profile_picture => p.device.profile_url}
+        matches << obj
+        puts obj.to_json
+        puts "what is going on???"
         Post.update_counters p.id, views: 1, radius: 0.20
       end
     end
-    render :json => matches.sort{|a,b| b.updated_at <=> a.updated_at} ## Can push off to (1) database or (2) iphone for efficiency
+    render :json => matches # matches.sort{|a,b| b[:post].updated_at <=> a[:post].updated_at} ## Can push off to (1) database or (2) iphone for efficiency
   end
 
   def down
