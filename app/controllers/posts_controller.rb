@@ -61,7 +61,7 @@ class PostsController < ApplicationController
         Post.update_counters p.id, views: 1, radius: 0.20
       end
     end
-    render :json => matches # matches.sort{|a,b| b[:post].updated_at <=> a[:post].updated_at} ## Can push off to (1) database or (2) iphone for efficiency
+    render :json => matches.sort{|a,b| b[:post].updated_at <=> a[:post].updated_at} ## Can push off to (1) database or (2) iphone for efficiency
   end
 
   def down
