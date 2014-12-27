@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141225205843) do
+ActiveRecord::Schema.define(version: 20141227093059) do
 
   create_table "devices", force: true do |t|
     t.string   "auth_key"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "parse_token"
+    t.string   "profile_url"
   end
 
   create_table "posts", force: true do |t|
@@ -34,5 +35,6 @@ ActiveRecord::Schema.define(version: 20141225205843) do
   end
 
   add_index "posts", ["created_at"], name: "post_created_at_index"
+  add_index "posts", ["device_id"], name: "post_device_foreign_key_index"
 
 end

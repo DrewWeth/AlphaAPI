@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
 
   post 'devices/register' => 'devices#register', :as => 'register'
-
+  post 'devices/newprofile' => 'devices#newprofile', :as => 'newprofile'
   resources :devices
 
 
@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post 'posts/up/:id' => 'posts#up', :as => 'up'
   post 'posts/down/:id' => 'posts#down', :as => 'down'
   post 'posts/viewed/:id' => 'posts#viewed', :as => 'viewed'
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
