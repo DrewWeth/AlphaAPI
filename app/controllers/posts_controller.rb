@@ -45,16 +45,18 @@ class PostsController < ApplicationController
 
   ## This needs to be redone so hard.
   def get_nearby
-    # radius = params["radius"].to_f || 5.0
     matches = []
-    if params["last"] == nil
-      posts = Post.where("created_at > ?", 2.days.ago).last(20)
+    if params["last"] != nil
+      posts = Post.where(['created_at < ?', params["last"]]).last(30)
+    elsif params["since"] != nil
+      posts = Post.where(['created_at > ?', params["since"]]).limit(30)
     else
-      posts = Post.where(['created_at < ?', params["last"]]).last(10)
+      posts = Post.where("created_at > ?", 2.days.ago).last(30)
     end
     posts.each do |p|
       if Geocoder::Calculations.distance_between([params["latitude"], params["longitude"]] , [p.latitude, p.longitude]) < p.radius
-        obj = {:post => p, :profile_picture => p.device.profile_url}
+        # obj = {:post => p, :profile_picture => p.device.profile_url}
+        obj = {:post => p }
         matches << obj
         puts obj.to_json
         puts "what is going on???"

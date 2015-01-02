@@ -15,6 +15,7 @@ group :production do
   gem 'pg'
 end
 
+gem 'activerecord-postgis-adapter'
 
 gem 'parse-ruby-client', '~> 0.3.0'
 
